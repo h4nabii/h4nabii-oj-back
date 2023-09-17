@@ -66,7 +66,7 @@ public class QuestionController {
         if (judgeCase != null) {
             question.setJudgeCase(GSON.toJson(judgeCase));
         }
-        List<JudgeConfig> judgeConfig = questionAddRequest.getJudgeConfig();
+        JudgeConfig judgeConfig = questionAddRequest.getJudgeConfig();
         if (judgeConfig != null) {
             question.setJudgeConfig(GSON.toJson(judgeConfig));
         }
@@ -126,7 +126,7 @@ public class QuestionController {
         if (judgeCase != null) {
             question.setJudgeCase(GSON.toJson(judgeCase));
         }
-        List<JudgeConfig> judgeConfig = questionUpdateRequest.getJudgeConfig();
+        JudgeConfig judgeConfig = questionUpdateRequest.getJudgeConfig();
         if (judgeConfig != null) {
             question.setJudgeConfig(GSON.toJson(judgeConfig));
         }
@@ -155,6 +155,27 @@ public class QuestionController {
             throw new BusinessException(ErrorCode.NOT_FOUND_ERROR);
         }
         return ResultUtils.success(questionService.getQuestionVO(question, request));
+    }
+
+    /**
+     * 根据 id 获取问题
+     * @param id 问题 id
+     * @return 对应 id 的问题
+     */
+    @GetMapping("/get")
+    public BaseResponse<Question> getQuestionById(long id, HttpServletRequest request) {
+        if (id <= 0) {
+            throw new BusinessException(ErrorCode.PARAMS_ERROR);
+        }
+        Question question = questionService.getById(id);
+        if (question == null) {
+            throw new BusinessException(ErrorCode.NOT_FOUND_ERROR);
+        }
+        User loginUser = userService.getLoginUser(request);
+        if (!question.getId().equals(loginUser.getId()) && !userService.isAdmin(loginUser)) {
+            throw new BusinessException(ErrorCode.NO_AUTH_ERROR);
+        }
+        return ResultUtils.success(question);
     }
 
     /**
@@ -237,7 +258,7 @@ public class QuestionController {
         if (judgeCase != null) {
             question.setJudgeCase(GSON.toJson(judgeCase));
         }
-        List<JudgeConfig> judgeConfig = questionEditRequest.getJudgeConfig();
+        JudgeConfig judgeConfig = questionEditRequest.getJudgeConfig();
         if (judgeConfig != null) {
             question.setJudgeConfig(GSON.toJson(judgeConfig));
         }
