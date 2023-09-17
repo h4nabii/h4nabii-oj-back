@@ -40,10 +40,9 @@ public class QuestionSubmitController {
 
     /**
      * 提交题目
-     *
-     * @param questionSubmitAddRequest
-     * @param request
-     * @return resultNum 本次点赞变化数
+     * @param questionSubmitAddRequest 提交请求
+     * @param request http 请求
+     * @return 提交后生成的题目 id
      */
     @PostMapping("/")
     public BaseResponse<Long> doQuestionSubmit(@RequestBody QuestionSubmitAddRequest questionSubmitAddRequest,
@@ -59,10 +58,9 @@ public class QuestionSubmitController {
 
     /**
      * 分页获取题目提交列表（非管理员只能看到公开信息）
-     *
-     * @param questionSubmitQueryRequest
-     * @param request
-     * @return
+     * @param questionSubmitQueryRequest 查询请求
+     * @param request http 请求
+     * @return 问题提交 VO 的列表
      */
     @PostMapping("/list/page")
     public BaseResponse<Page<QuestionSubmitVO>> listQuestionSubmitByPage(@RequestBody QuestionSubmitQueryRequest questionSubmitQueryRequest,

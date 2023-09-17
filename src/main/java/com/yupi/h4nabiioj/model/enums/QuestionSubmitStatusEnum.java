@@ -1,5 +1,6 @@
 package com.yupi.h4nabiioj.model.enums;
 
+import lombok.Getter;
 import org.apache.commons.lang3.ObjectUtils;
 
 import java.util.Arrays;
@@ -12,6 +13,7 @@ import java.util.stream.Collectors;
  * @author <a href="https://github.com/liyupi">程序员鱼皮</a>
  * @from <a href="https://yupi.icu">编程导航知识星球</a>
  */
+@Getter
 public enum QuestionSubmitStatusEnum {
 
     WAITING("等待中", 0),
@@ -30,8 +32,7 @@ public enum QuestionSubmitStatusEnum {
 
     /**
      * 获取值列表
-     *
-     * @return
+     * @return 所有枚举值的列表
      */
     public static List<Integer> getValues() {
         return Arrays.stream(values()).map(item -> item.value).collect(Collectors.toList());
@@ -39,9 +40,8 @@ public enum QuestionSubmitStatusEnum {
 
     /**
      * 根据 value 获取枚举
-     *
-     * @param value
-     * @return
+     * @param value 传入的枚举信息
+     * @return 获取到的枚举实例，不存在则返回 {@code null}
      */
     public static QuestionSubmitStatusEnum getEnumByValue(Integer value) {
         if (ObjectUtils.isEmpty(value)) {
@@ -55,11 +55,4 @@ public enum QuestionSubmitStatusEnum {
         return null;
     }
 
-    public Integer getValue() {
-        return value;
-    }
-
-    public String getText() {
-        return text;
-    }
 }

@@ -87,9 +87,8 @@ public class QuestionVO implements Serializable {
 
     /**
      * 包装类转对象
-     *
-     * @param questionVO
-     * @return
+     * @param questionVO 传入的 {@link QuestionVO} 对象
+     * @return 解包后的原 {@link Question} 对象
      */
     public static Question voToObj(QuestionVO questionVO) {
         if (questionVO == null) {
@@ -112,9 +111,8 @@ public class QuestionVO implements Serializable {
 
     /**
      * 对象转包装类
-     *
-     * @param question
-     * @return
+     * @param question 传入的 {@link Question} 对象
+     * @return 包装后的 {@link QuestionVO} 对象
      */
     public static QuestionVO objToVo(Question question) {
         if (question == null) {

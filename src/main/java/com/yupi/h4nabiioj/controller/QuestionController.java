@@ -46,10 +46,10 @@ public class QuestionController {
     // region 增删改查
 
     /**
-     * 创建
+     * 创建问题
      * @param questionAddRequest 添加问题请求
-     * @param request http请求
-     * @return 响应体
+     * @param request http 请求体
+     * @return 响应体，返回添加信息
      */
     @PostMapping("/add")
     public BaseResponse<Long> addQuestion(@RequestBody QuestionAddRequest questionAddRequest, HttpServletRequest request) {
@@ -82,11 +82,10 @@ public class QuestionController {
     }
 
     /**
-     * 删除
-     *
-     * @param deleteRequest
-     * @param request
-     * @return
+     * 删除问题
+     * @param deleteRequest 删除问题请求
+     * @param request http 请求体
+     * @return 响应体，返回删除信息
      */
     @PostMapping("/delete")
     public BaseResponse<Boolean> deleteQuestion(@RequestBody DeleteRequest deleteRequest, HttpServletRequest request) {
@@ -107,10 +106,9 @@ public class QuestionController {
     }
 
     /**
-     * 更新（仅管理员）
-     *
-     * @param questionUpdateRequest
-     * @return
+     * 更新问题（仅管理员）
+     * @param questionUpdateRequest 更新问题请求
+     * @return 响应体，返回更新信息
      */
     @PostMapping("/update")
     @AuthCheck(mustRole = UserConstant.ADMIN_ROLE)
@@ -143,10 +141,9 @@ public class QuestionController {
     }
 
     /**
-     * 根据 id 获取
-     *
-     * @param id
-     * @return
+     * 根据 id 获取问题 VO
+     * @param id 问题 id
+     * @return 对应 id 的问题 VO
      */
     @GetMapping("/get/vo")
     public BaseResponse<QuestionVO> getQuestionVOById(long id, HttpServletRequest request) {
@@ -161,11 +158,10 @@ public class QuestionController {
     }
 
     /**
-     * 分页获取列表（封装类）
-     *
-     * @param questionQueryRequest
-     * @param request
-     * @return
+     * 分页获取问题 VO 列表
+     * @param questionQueryRequest 查询问题请求
+     * @param request http 请求体
+     * @return 响应体，返回问题 VO 的分页
      */
     @PostMapping("/list/page/vo")
     public BaseResponse<Page<QuestionVO>> listQuestionVOByPage(@RequestBody QuestionQueryRequest questionQueryRequest,
@@ -180,11 +176,10 @@ public class QuestionController {
     }
 
     /**
-     * 分页获取当前用户创建的资源列表
-     *
-     * @param questionQueryRequest
-     * @param request
-     * @return
+     * 分页获取当前用户创建的问题列表
+     * @param questionQueryRequest 查询请求
+     * @param request http请求
+     * @return 当前用户创建的问题 VO 列表
      */
     @PostMapping("/my/list/page/vo")
     public BaseResponse<Page<QuestionVO>> listMyQuestionVOByPage(@RequestBody QuestionQueryRequest questionQueryRequest,
@@ -207,15 +202,12 @@ public class QuestionController {
 
     /**
      * 分页获取题目列表（仅管理员）
-     *
-     * @param questionQueryRequest
-     * @param request
-     * @return
+     * @param questionQueryRequest 查询请求
+     * @return 问题 VO 列表
      */
     @PostMapping("/list/page")
     @AuthCheck(mustRole = UserConstant.ADMIN_ROLE)
-    public BaseResponse<Page<Question>> listQuestionByPage(@RequestBody QuestionQueryRequest questionQueryRequest,
-                                                   HttpServletRequest request) {
+    public BaseResponse<Page<Question>> listQuestionByPage(@RequestBody QuestionQueryRequest questionQueryRequest) {
         long current = questionQueryRequest.getCurrent();
         long size = questionQueryRequest.getPageSize();
         Page<Question> userPage = questionService.page(new Page<>(current, size),
@@ -225,11 +217,10 @@ public class QuestionController {
 
 
     /**
-     * 编辑（用户）
-     *
-     * @param questionEditRequest
-     * @param request
-     * @return
+     * 编辑问题（用户）
+     * @param questionEditRequest 编辑请求
+     * @param request http 请求
+     * @return 编辑信息
      */
     @PostMapping("/edit")
     public BaseResponse<Boolean> editQuestion(@RequestBody QuestionEditRequest questionEditRequest, HttpServletRequest request) {
@@ -264,5 +255,4 @@ public class QuestionController {
         boolean result = questionService.updateById(question);
         return ResultUtils.success(result);
     }
-
 }

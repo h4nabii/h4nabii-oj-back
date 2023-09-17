@@ -1,5 +1,6 @@
 package com.yupi.h4nabiioj.model.enums;
 
+import lombok.Getter;
 import org.apache.commons.lang3.ObjectUtils;
 
 import java.util.Arrays;
@@ -12,6 +13,7 @@ import java.util.stream.Collectors;
  * @author <a href="https://github.com/liyupi">程序员鱼皮</a>
  * @from <a href="https://yupi.icu">编程导航知识星球</a>
  */
+@Getter
 public enum QuestionSubmitLanguageEnum {
 
     JAVA("java", "java"),
@@ -29,8 +31,7 @@ public enum QuestionSubmitLanguageEnum {
 
     /**
      * 获取值列表
-     *
-     * @return
+     * @return 所有枚举值的列表
      */
     public static List<String> getValues() {
         return Arrays.stream(values()).map(item -> item.value).collect(Collectors.toList());
@@ -38,9 +39,8 @@ public enum QuestionSubmitLanguageEnum {
 
     /**
      * 根据 value 获取枚举
-     *
-     * @param value
-     * @return
+     * @param value 传入的枚举信息
+     * @return 获取到的枚举实例，不存在则返回 {@code null}
      */
     public static QuestionSubmitLanguageEnum getEnumByValue(String value) {
         if (ObjectUtils.isEmpty(value)) {
@@ -52,13 +52,5 @@ public enum QuestionSubmitLanguageEnum {
             }
         }
         return null;
-    }
-
-    public String getValue() {
-        return value;
-    }
-
-    public String getText() {
-        return text;
     }
 }

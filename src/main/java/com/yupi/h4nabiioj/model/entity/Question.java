@@ -9,7 +9,7 @@ import java.util.Date;
 import lombok.Data;
 
 /**
- * 帖子
+ * 问题
  * @TableName question
  */
 @TableName(value ="question")

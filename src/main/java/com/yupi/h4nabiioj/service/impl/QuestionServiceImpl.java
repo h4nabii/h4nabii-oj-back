@@ -3,7 +3,6 @@ package com.yupi.h4nabiioj.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.google.gson.Gson;
 import com.yupi.h4nabiioj.common.ErrorCode;
 import com.yupi.h4nabiioj.constant.CommonConstant;
 import com.yupi.h4nabiioj.exception.BusinessException;
@@ -27,15 +26,12 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 /**
-* @author 10367
 * @description 针对表【question(帖子)】的数据库操作Service实现
 * @createDate 2023-09-16 05:19:55
 */
 @Service
 public class QuestionServiceImpl extends ServiceImpl<QuestionMapper, Question>
     implements QuestionService{
-
-    private final static Gson GSON = new Gson();
 
     @Resource
     private UserService userService;
@@ -77,9 +73,8 @@ public class QuestionServiceImpl extends ServiceImpl<QuestionMapper, Question>
 
     /**
      * 获取查询包装类
-     *
-     * @param questionQueryRequest
-     * @return
+     * @param questionQueryRequest 查询请求
+     * @return 查询到的问题列表
      */
     @Override
     public QueryWrapper<Question> getQueryWrapper(QuestionQueryRequest questionQueryRequest) {
@@ -115,7 +110,6 @@ public class QuestionServiceImpl extends ServiceImpl<QuestionMapper, Question>
     @Override
     public QuestionVO getQuestionVO(Question question, HttpServletRequest request) {
         QuestionVO questionVO = QuestionVO.objToVo(question);
-        long questionId = question.getId();
         // 1. 关联查询用户信息
         Long userId = question.getUserId();
         User user = null;

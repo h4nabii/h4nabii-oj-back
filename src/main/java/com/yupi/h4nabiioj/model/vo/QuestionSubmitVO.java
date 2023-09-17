@@ -2,26 +2,17 @@
 package com.yupi.h4nabiioj.model.vo;
 
 import cn.hutool.json.JSONUtil;
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.yupi.h4nabiioj.model.dto.question.JudgeConfig;
 import com.yupi.h4nabiioj.model.dto.questionsubmit.JudgeInfo;
-import com.yupi.h4nabiioj.model.dto.questionsubmit.QuestionSubmitQueryRequest;
-import com.yupi.h4nabiioj.model.entity.Question;
 import com.yupi.h4nabiioj.model.entity.QuestionSubmit;
-import com.yupi.h4nabiioj.model.entity.User;
 import lombok.Data;
 import org.springframework.beans.BeanUtils;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
 /**
- * 帖子
- *
+ * 问题 VO
  * @TableName question
  */
 @TableName(value = "question")
@@ -84,9 +75,8 @@ public class QuestionSubmitVO implements Serializable {
 
     /**
      * 包装类转对象
-     *
-     * @param questionSubmitVO
-     * @return
+     * @param questionSubmitVO 传入的 {@link QuestionSubmitVO} 对象
+     * @return 解包后的原 {@link QuestionSubmit} 对象
      */
     public static QuestionSubmit voToObj(QuestionSubmitVO questionSubmitVO) {
         if (questionSubmitVO == null) {
@@ -103,9 +93,8 @@ public class QuestionSubmitVO implements Serializable {
 
     /**
      * 对象转包装类
-     *
-     * @param questionSubmit
-     * @return
+     * @param questionSubmit 传入的 {@link QuestionSubmit} 对象
+     * @return 包装后的 {@link QuestionSubmitVO} 对象
      */
     public static QuestionSubmitVO objToVo(QuestionSubmit questionSubmit) {
         if (questionSubmit == null) {

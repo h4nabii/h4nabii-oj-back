@@ -25,13 +25,11 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * @author 10367
- * @description 针对表【question_submit(帖子题目提交)】的数据库操作Service实现
+ * @description 针对表【question_submit(题目提交)】的数据库操作Service实现
  * @createDate 2023-09-16 05:20:51
  */
 @Service
@@ -46,10 +44,9 @@ public class QuestionSubmitServiceImpl extends ServiceImpl<QuestionSubmitMapper,
 
     /**
      * 题目提交
-     *
-     * @param questionSubmitAddRequest
-     * @param loginUser
-     * @return
+     * @param questionSubmitAddRequest 提交请求
+     * @param loginUser 登录用户
+     * @return 提交后生成的提交 id
      */
     @Override
     public Long doQuestionSubmit(QuestionSubmitAddRequest questionSubmitAddRequest, User loginUser) {
@@ -84,9 +81,8 @@ public class QuestionSubmitServiceImpl extends ServiceImpl<QuestionSubmitMapper,
 
     /**
      * 获取查询包装类
-     *
-     * @param questionSubmitQueryRequest
-     * @return
+     * @param questionSubmitQueryRequest 查询请求
+     * @return 查询到的提交列表
      */
     @Override
     public QueryWrapper<QuestionSubmit> getQueryWrapper(QuestionSubmitQueryRequest questionSubmitQueryRequest) {
